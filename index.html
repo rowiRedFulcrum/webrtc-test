@@ -6,7 +6,9 @@
 <body>
 
 <div id="vid-box"></div>
-tea
+
+<div id="vid-box-2"></div>
+
 <form name="loginForm" id="login" action="#" onsubmit="return login(this);">
     <input type="text" name="username" id="username" placeholder="Pick a username!" />
     <input type="submit" name="login_submit" value="Log In">
@@ -27,16 +29,25 @@ tea
 	
 
 var video_out = document.getElementById("vid-box");
-console.log(video_out)
-// var video_out = document.getElementById("vid-box");
+
+var video_self = document.getElementById("vid-box-2");
+
+
 function login(form) {
 	var phone = window.phone = PHONE({
 	    number        : form.username.value || "Anonymous", // listen on username line else Anonymous
 	    publish_key   : 'pub-c-44bc4018-97ba-40e0-93d4-d0af10371125',
 	    subscribe_key : 'sub-c-b2128c2a-757d-11ea-808e-bad180999bc3',
 	});	
-	phone.ready(function(){ form.username.style.background="#55ff5b"; });
+	phone.ready(function(){ 
+    form.username.style.background="#55ff5b";
+    video_self.appendChild(phone.video)
+    // console.log(phone.video)
+  });
+
+
 	phone.receive(function(session){
+      console.log(session)
 	    session.connected(function(session) { video_out.appendChild(session.video); });
 	    session.ended(function(session) { video_out.innerHTML=''; });
 	});

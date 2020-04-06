@@ -342,10 +342,14 @@ var PHONE = window.PHONE = function(config) {
         video.width  = snap.width;
         video.height = snap.height;
       
+
+        video.setAttribute( 'autoplay', 'autoplay' );
+        // video.setAttribute( 'data-number', number );
         video.srcObject=stream;
         video.volume = 0.0;
         video.play();
 
+        console.log(video)
         // Canvas Settings
         canvas.width  = snap.width;
         canvas.height = snap.height;
